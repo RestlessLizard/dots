@@ -1,0 +1,105 @@
+## TMP
+alias psql_s='doas systemctl start postgresql'
+alias mh='man herbstluftwm'
+alias hc='herbstclient'
+
+### ADD COLOR 
+
+alias grep='grep --color=auto' 
+alias less='less -R'
+
+### MY CONFIG 
+
+alias doas='doas ' 
+
+alias c='clear'
+alias kc="printf '\033[2J\033[3J\033[1;1H'"
+
+alias ls='lsd --group-dirs first' 
+alias ll='ls -lh' 
+alias la='ls -A' 
+alias lla='ls -lAh' 
+alias lh='ls -d .*' 
+
+alias mv='mv -i'
+
+alias v='nvim'
+alias vim='nvim'
+alias vw='nvim -c VimwikiIndex' 
+
+alias locate='plocate'
+
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+
+alias p='doas pacman'
+alias SS='doas systemctl'
+alias SU='systemctl --user'
+
+alias back='feh --bg-scale'
+#MOJO
+
+mojoparse() {
+	url=$(echo $@ | awk '{ print $1 }')
+
+	if [ -n "$(echo $url | grep -E '^[0-9]{3,4}$')" ]
+	then
+		url="cs$url"
+	fi
+
+	if [ ! -n "$(echo $url | grep -E '.+\..+')" ]
+	then
+		if [ -n "$(echo $@ | awk ' { print $2 } ')" ]
+		then url="$url.mojohost.eu"
+		else
+			url="$url.mojohost.com"
+		fi
+	fi
+
+	echo "$url"
+}
+
+t() {
+	res=$(mojoparse $@)
+	echo "$res"
+	tmux rename-window $(echo "$res" | egrep -o "^[^\.]+")
+	TERM=xterm-256color ssh -l arthurt $res
+}
+
+alias ssm="ssh -l arthurt"
+
+alias feh="feh --scale-down -B '#333333'"
+
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+
+
+save(){
+	echo "$@" >> .vimwiki/youknow.wiki   
+}
+
+alias job='tmux new-session -s job || tmux a -t job'
+alias cal='cal -m'
+f() {
+	if [ -z $1 ]
+	then
+		rifle "$(find . -type f 2>/dev/null | fzf --height=5)"
+	else
+		rifle "$(find $1 -type f 2>/dev/null | fzf --height=5)"
+	fi
+}
+alias F='rifle $(find ~ -type f 2>/dev/null | fzf --height=5)'
+
+d() {
+	if [ -z $1 ]
+	then
+		rifle "$(find . -type d 2>/dev/null | fzf --height=5)"
+	else
+		rifle "$(find $1 -type f 2>/dev/null | fzf --height=5)"
+	fi
+}
+alias D='cd $(find ~ -type d 2>/dev/null | fzf --height=5)'
+
+alias we='curl "wttr.in?0"'

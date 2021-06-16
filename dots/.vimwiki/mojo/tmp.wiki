@@ -1,0 +1,19 @@
+- reruned certbot with no errors - 125
+- certbot stuck - 44
+- no need to renew(already renewed) - 37
+- specify webroot location - 32
+- domain name not pointing to our server - 25
+- manual - 26
+- migration - 6
+- domains living on another our server - 4
+- wrong certificate file used (-001 used) - 4
+- bad rewrite to www, adding !/.well-known helped - 1
+- few certs configured (-001, -003), proper one was working - 1
+
+- some certbots get stuck on "Running deploy-hook command: /usr/local/mojo/bin/restart_webserver"
+
+
+
+= DONT DELETE, HERE FAIL2BAN WAS RECONFIGURED DUE TO SMTP ATTACK =
+cs1843
+cs2705

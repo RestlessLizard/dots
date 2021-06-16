@@ -1,0 +1,56 @@
+# terminal and backup terminal
+super + Return
+	alacritty
+
+super + shift + Return
+	alacritty
+
+# program launcher
+super + d 
+	rofi run -show drun -drun-display-format '\{name\}' -theme ~/.config/rofi/theme.rasi -no-show-match -display-drun '┌∩┐(◣_◢)┌∩┐'
+# scripts with rofi gui
+super + p
+	~/scripts/pass.sh
+
+super + t
+	~/scripts/timer.sh
+
+super + shift + a
+	~/scripts/floaterm.sh
+
+# audio
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +2%;
+
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -2%;
+
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle;
+
+# misc
+Print
+#	maim --select --color=255,255,255  | xclip -selection clipboard -t image/png
+	flameshot gui
+
+super + n
+	dunstctl close-all
+
+super + i
+	~/scripts/lazyType.py
+
+super + shift + @b
+	xset dpms force off
+
+# program launcher
+#super + e ; {b,c,f,s,n,t,d,p}
+#	notify-send "Launch";	\
+#	{	brave				\
+#	,	code				\
+#	,	firefox				\
+#	,	slack				\
+#	,	nagstamon			\
+#	,	telegram-desktop	\
+#	,	discord				\
+#	,	keepassxc			\
+#	}

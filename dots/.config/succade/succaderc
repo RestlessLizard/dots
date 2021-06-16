@@ -1,0 +1,59 @@
+[bar]
+name = "testbar"
+blocks = "desktop | | ram cpu datetime "
+height = 30
+foreground = "#fff"
+background = "#111418"
+font = "Hack Nerd Font"
+separator = "|"
+
+line-color = "#FF5588"
+line-width = 0
+
+[default]
+label-foreground = "#40e0d0"
+#affix-foreground = "#555555"
+margin = 8
+underline = true
+
+[desktop]
+command = "~/scripts/bar/workspaces.sh"
+trigger = "bspc subscribe"
+margin-left = 16
+raw = true
+mouse-left = "bspc wm -r"
+mouse-right = "kitty"
+underline = false
+
+[datetime]
+command = "date +'%T %a %F'"
+interval = 1
+margin-right = 16
+mouse-left = "~/scripts/bar/actions/timeEST.sh"
+mouse-right = "~/scripts/bar/actions/cal.sh"
+
+[cpu]
+label = "CPU "
+command = "~/scripts/bar/cpu.sh"
+interval = 3
+mouse-left = "~/scripts/bar/actions/cpuUsage.sh"
+
+[ram]
+label = "RAM "
+command = "~/scripts/bar/ram.sh"
+interval = 3
+mouse-left = "~/scripts/bar/actions/ramUsage.sh"
+
+[lay]
+command = "~/scripts/bar/layout.sh"
+live = true
+
+[num]
+label = "C: "
+command = "~/scripts/bar/num.sh start"
+live = true
+mouse-left = "~/scripts/bar/num.sh update"
+mouse-right = "~/scripts/bar/num.sh reset"
+prefix = "["
+suffix = "]"
+

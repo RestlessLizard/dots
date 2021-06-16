@@ -1,0 +1,40 @@
+define service{
+        use                             generic-service
+        host_name                       cs3753
+        service_description             MEMCACHE
+        max_check_attempts              5
+        normal_check_interval           2
+        retry_check_interval            1
+        notification_interval           30
+        notification_options            c,r
+        check_command                   check_memcached_response!184.94.157.114:11211
+
+        }
+
+define servicedependency{
+        host_name                       cs3753
+        service_description             HTTP
+        dependent_host_name             cs3753
+        dependent_service_description   MEMCACHE
+        execution_failure_criteria      w,u,c
+        notification_failure_criteria   w,u,c
+        }
+
+
+   FTP Account Information
+=============================
+Hostname: cs3753.mojohost.com Port(s): 21
+Username: elevatedx_ftp
+Password: ZHmYHMxOcqIvbjk6
+Chroot:   /home/httpd/html
+
+
+  Database Information
+========================
+Hostname: localhost
+Database: elevatedx
+Username: elevatedx
+Password: NZkiVCjiDWYiCRIH
+
+
+join.masqulin.com|join.menatplay.com|nats.pinstripecash.com|pinstripecash.com|www.pinstripecash.com

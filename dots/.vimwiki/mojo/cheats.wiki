@@ -1,0 +1,56 @@
+= awstats fix icons =
+
+sed -i 's;/cgi-bin/icon;/awstats/icon;g' /home/httpd/cgi-bin/awstats.*.conf; sh /home/httpd/cgi-bin/doaw.sh;  cp -arv /usr/share/awstats/wwwroot/icon/ /home/httpd/html/awstats/icon/
+
+= certbot www redirect =
+
+htacces
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !/.well-known [NC]
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+= backup auth error =
+
+copy /usr/sbin/r1soft/conf/server.allow/bk14.mojohost.eu from working server
+
+= manual client dns =
+
+select * from records where domain_id=1;
+
+insert into records(`domain_id`, `name`, `type`, `content`) values (1, '1r4.com', 'TXT', '');
+
+update records set content='dns1.mojohost.eu hostmaster@mojohost.eu 2018060502 28800 7200 604800 86400' where domain_id='131' and type="SOA" limit 1;
+
+= check dns record =
+
+named-checkzone domain.com domain.com.dns
+
+= catch-all domain =
+
+@membergrid.com                         ophelia_memgrid
+
+= bk link =
+
+http://bk11.mojohost.com:8080/cgi-bin/BackupPC_Admin
+
+
+= ipmi down = 
+systemctl stop ipmi
+systemctl start ipmi
+
+// If ipmi isn't fixed do the following
+
+ipmitool lan print //get ipmi info
+
+ipmitool mc reset cold
+
+// use this info in the next commands
+ipmitool lan set 1 ipsrc static 
+ipmitool lan set 1 ipaddr 100.101.0.115
+ipmitool lan set 1 netmask 255.255.240.0
+ipmitool lan set 1 defgw ipaddr  100.101.0.1
+
+
+= live

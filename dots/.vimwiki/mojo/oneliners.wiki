@@ -1,0 +1,38 @@
+== get what is using php-fpm ==
+
+cat /etc/httpd/conf/WHMCS_MIA_940.conf | grep "ServerName\|AddType" | grep -B1 "AddType"
+
+= UUID+  =
+
+blkid
+
+= svetofor = 
+
+sudo service httpd stop ; sudo killall -9 httpd ; clear_semaphores now ; service httpd restart
+
+= svetofo++ =
+
+for id in $(ipcs -s | awk '{print $2}' | grep "^[0-9]"); do printf "Semaphore with id %d is used by PIDs: " $id; ipcs -s -i $id | grep -o "^[0-9].*" | awk '{print $NF}' | xargs -I {} printf "%d, " {}; printf "\033[2D \n"; done;
+
+= apache connections =
+
+netstat -ant | awk '{print $5}' | cut -d":" -f1 | sort | uniq -c | sort -nr
+
+= SYN flood =
+
+netstat -tn 2>/dev/null | grep SYN | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr 
+
+= RAM usage =
+
+for file in /proc/*/status ; do awk '/VmRSS|Name/{printf $2 " " $3}END{ print ""}' $file; done | awk '{b[$1]+=$2} END { for (i in b) { print b[i],i } }' | sort -rn | awk '{if($1<1024) {printf("%8d Kb",$1);} else if ($1<1024*1024) {printf("%8.2f Mb", $1/1024);} else {printf("%8.2f Gb", $1/1024/1024);} {print " "$2}}' | head 
+
+= Generate link =
+
+whmapi1 create_user_session user=root service=whostmgrd locale=en
+
+== SYN ==
+
+netstat -nat | grep -v "::" | awk '{gsub(":"," "); print $5 "\t" $6 "\t" $NF}' | sort | uniq -c | sort -rn | head -n 30
+
+= Available IPs = 
+ALLIPS=$(/sbin/ifconfig -a|grep "inet "|awk '{print $2}'| awk -F ":" '{print $2}'); echo "${ALLIPS}" > /tmp/allips.txt; for i in `/mojo/livedomains --live|egrep [0-9]|cut -d\@ -f2|sort -n|uniq|sort -n`; do sed -i "/"$i"/d" /tmp/allips.txt ;done && cat /tmp/allips.txt

@@ -1,0 +1,17 @@
+= Packages by size =
+
+pacman -Qi | grep -E '^Name|^Installed Size' | sed 's/.*: //' | xargs -n2 -d'\n' | awk '{print $2$3" "$1}' | sort -h
+
+= Active workspace names =
+
+i3-msg -t get_workspaces | grep -E -o "name\":\"[0-9]+" | grep -E -o "[0-9]+" | xargs -I {} grep -E "^set..ws{}\ " ~/.config/i3/config | grep -E -o "\".+\"" | sed "s/\"//g"
+
+= Processes by RAM = 
+
+ps axch -o cmd,%mem --sort=cmd | awk '{ x[$1]+=$2 } END {for (k in x) if(x[k] != "0") print k,x[k]"%"}' | column -t | sort -rnk2
+
+
+= T =
+
+ps -p $(xdotool getactivewindow getwindowpid) -ho cmd
+

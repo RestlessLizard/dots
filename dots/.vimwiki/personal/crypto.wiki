@@ -1,0 +1,10 @@
+- [ ] Стакан
+- [ ] Как нормально ловить ревёрсы при таком рынке как сейчас
+- [ ] Тулзы и сайты для рисования ренджов, фибки и т.п.
+
+= MOVES =
+1. Expansion - movement up/down
+2. Retracement - fast jump and then slow movement back, after which the movement continues in jump direciton
+3. Reversal - hitting the max/min point twice/trice after which the movement direction is reversed
+4. Consolidation - small movements in the range. After moving from the range border to the middle point and back the move outside of the range is expected
+

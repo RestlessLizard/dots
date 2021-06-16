@@ -1,0 +1,19 @@
+upgrade "t" function to use eosdns as "d" option and .eu as "e" option
+
+customize tmux colors for the bar
+also do if possible tab auoreordering
+
+==========================================
+
+equery list "*" | grep konsole
+
+startx
+
+neofetch
+
+alacritty
+
+==========================================
+
+
+дия вакцина

@@ -1,0 +1,19 @@
+= Personal =
+
+[[Tasks]]
+[[personal/crypto|Crypto]]
+[[personal/oneliners|Oneliners]]
+[[personal/birthdays|Birthdays]]
+[[youknow]]
+
+= Mojohost =
+
+[[mojo/cheats|Cheat Sheet]]
+[[mojo/oneliners|Oneliners]]
+[[mojo/tmp|Jrimiah]]
+[[mojo/nagios|Nagios]]
+
+= Web =
+
+[[web/learn|Learn]]
+

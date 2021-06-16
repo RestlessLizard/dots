@@ -1,0 +1,59 @@
+$ rofi -dmenu -i -theme ~/.config/rofi/theme.rasi -p >>
+
+: SYN
+netstat -tn 2>/dev/null | grep SYN | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr 
+
+: ram usage
+for file in /proc/*/status ; do awk '/VmRSS|Name/{printf $2 " " $3}END{ print ""}' $file; done | awk '{b[$1]+=$2} END { for (i in b) { print b[i],i } }' | sort -rn | awk '{if($1<1024) {printf("%8d Kb",$1);} else if ($1<1024*1024) {printf("%8.2f Mb", $1/1024);} else {printf("%8.2f Gb", $1/1024/1024);} {print " "$2}}' | head 
+
+> good end
+Please contact us if you need any further assistance.
+
+: certbot
+certbot-auto renew
+
+: certbot/kill
+killall -9 certbot-auto-renew; killall -9 certbot-auto; killall -9 letsencrypt
+
+: certbot/restart_webserver
+vim /usr/local/mojo/bin/restart_webserver
+gg/443
+nnncw80
+
+> certbot/not in use
+The certificate is not due renewal, but not in use
+
+> certbot/already renewed
+The certificate is already renewed
+
+> certbot/stuck
+Certbot was stuck
+
+> certbot/cert success
+```
+The following certs were successfully renewed:
+%% xclip -selection clipboard -o
+```
+
+> certbot/cert paste
+```
+%% xclip -selection clipboard -o
+```
+
+> certbot/not due renewal
+The certificate is not due for renewal
+
+: skin
+t skbuild.mojohost.com
+
+: nag
+/etc/nagios/auto-cfg/
+
+: last
+history | tail -n100
+
+: backup
+/usr/local/mojo/sbin/install_r1soft_agent -s bk14 -i eth1 -e com
+
+: drop
+iptables -I INPUT -s <IP> -j DROP
